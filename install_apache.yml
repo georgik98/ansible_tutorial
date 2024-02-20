@@ -4,12 +4,15 @@
   become: true
   tasks:
 
-  - name: update repository index
-    apt:
-      update_cache: yes
-
-  - name: install apache2 and php packages for Ubuntu
+  - name: install & update apache2 and php packages for Ubuntu
+    tags: always
     apt:
       name: 
         - apache2
+        - libapache2-mod-php
+      state: latest
+      update_cache: yes
+  - name: install samba package
+    package:
+      name: samba
       state: latest
