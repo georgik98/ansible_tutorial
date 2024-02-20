@@ -12,6 +12,17 @@
         - libapache2-mod-php
       state: latest
       update_cache: yes
+  - name: start apache2
+    tags: apache2
+    service:
+      name: apache2
+      state: started
+  - name: enable apache2
+    tags: apache2
+    service:
+      name: apache2
+      state: started
+      enabled: yes
   - name: install samba package
     package:
       name: samba
