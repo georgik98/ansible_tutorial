@@ -1,0 +1,48 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install & update apache2 and php packages for Ubuntu
+    tags: always
+    apt:
+      name: 
+        - apache2
+        - libapache2-mod-php
+      state: latest
+      update_cache: yes
+  - name: start apache2
+    tags: apache2
+    service:
+      name: apache2
+      state: started
+  - name: enable apache2
+    tags: apache2
+    service:
+      name: apache2
+      state: started
+      enabled: yes
+  - name: install samba package
+    package:
+      name: samba
+      state: latest
+  - name: copy files
+    copy:
+      src: /home/debian/ansible_tutorial/files/default_site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
+- hosts: all
+  become: true
+  tasks:
+    - name: create simone user
+      tags: always
+      user:
+        name: simone
+        groups: root
+- hosts: all
+  become: true
+  roles:
+    - workstations  
