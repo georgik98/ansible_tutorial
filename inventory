@@ -2,3 +2,6 @@
 
 [workstations]
 192.168.64.6
+
+[normal_server]
+192.168.64.8
